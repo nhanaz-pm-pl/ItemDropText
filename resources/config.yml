@@ -1,10 +1,3 @@
-# General
-**Displays floating text that contains information of the dropped item.**
-
-![IMG](https://user-images.githubusercontent.com/60387689/211273088-d523260f-0c81-4ca3-89dc-f4f935333398.jpg)
-
-# Config
-```yaml
 ---
 # - \n : Newlines.
 # - & or § : Colors.
@@ -18,8 +11,3 @@
 # - {lore} : Returns the lore of the item.
 format: "{name} x{count}"
 ...
-```
-
-# Contact
-[![Discord](https://img.shields.io/discord/986553214889517088?label=discord&color=7289DA&logo=discord)](https://discord.gg/j2X83ujT6c)\
-**You can contact me directly via Discord `NhanAZ#9115`**

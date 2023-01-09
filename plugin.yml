@@ -1,0 +1,10 @@
+---
+name: ItemDropText
+version: 0.0.1
+main: NhanAZ\ItemDropText\Main
+api: 4.0.0
+
+website: https://github.com/NhanAZ
+description: Displays floating text that contains information of the dropped item.
+author: NhanAZ
+...
