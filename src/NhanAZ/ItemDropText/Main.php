@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace NhanAZ\ItemDropText;
 
+use pocketmine\entity\Entity;
+use pocketmine\entity\object\ItemEntity;
+use pocketmine\event\entity\ItemMergeEvent;
 use pocketmine\event\entity\ItemSpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
@@ -16,14 +19,13 @@ class Main extends PluginBase implements Listener {
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function onItemSpawn(ItemSpawnEvent $event): void {
-		$entity = $event->getEntity();
+	public function setNameTag(Entity|ItemEntity $entity, int $count): void {
 		$item = $entity->getItem();
 		$format = $this->getConfig()->get("format");
 		$replacements = [
 			"{name}" => $item->getName(),
 			"{vanillaName}" => $item->getVanillaName(),
-			"{count}" => $item->getCount(),
+			"{count}" => $count,
 			"{attackPoints}" => $item->getAttackPoints(),
 			"{cooldownTicks}" => $item->getCooldownTicks(),
 			"{defensePoints}" => $item->getDefensePoints(),
@@ -33,5 +35,19 @@ class Main extends PluginBase implements Listener {
 		$format = str_replace(array_keys($replacements), array_values($replacements), $format);
 		$entity->setNameTag(TextFormat::colorize($format));
 		$entity->setNameTagAlwaysVisible();
+	}
+
+	public function onItemSpawn(ItemSpawnEvent $event): void {
+		$entity = $event->getEntity();
+		$this->setNameTag($entity, $entity->getItem()->getCount());
+	}
+
+	public function onItemMerge(ItemMergeEvent $event): void {
+		$entity = $event->getEntity();
+		$target = $event->getTarget();
+		if ($entity instanceof ItemEntity) {
+			$count = $entity->getItem()->getCount() + $target->getItem()->getCount();
+		}
+		$this->setNameTag($target, $count);
 	}
 }
