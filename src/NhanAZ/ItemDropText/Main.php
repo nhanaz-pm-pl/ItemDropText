@@ -47,7 +47,7 @@ class Main extends PluginBase implements Listener {
 		$target = $event->getTarget();
 		if ($entity instanceof ItemEntity) {
 			$count = $entity->getItem()->getCount() + $target->getItem()->getCount();
+			$this->setNameTag($target, $count);
 		}
-		$this->setNameTag($target, $count);
 	}
 }
