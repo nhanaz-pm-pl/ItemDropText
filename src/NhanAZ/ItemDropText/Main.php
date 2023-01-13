@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace NhanAZ\ItemDropText;
 
-use pocketmine\entity\Entity;
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\event\entity\ItemMergeEvent;
 use pocketmine\event\entity\ItemSpawnEvent;
