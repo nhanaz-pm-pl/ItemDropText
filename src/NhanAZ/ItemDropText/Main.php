@@ -19,7 +19,7 @@ class Main extends PluginBase implements Listener {
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function setNameTag(Entity|ItemEntity $entity, int $count): void {
+	public function setNameTag(ItemEntity $entity, int $count): void {
 		$item = $entity->getItem();
 		$format = $this->getConfig()->get("format");
 		$replacements = [
@@ -32,7 +32,7 @@ class Main extends PluginBase implements Listener {
 			"{maxStackSize}" => $item->getMaxStackSize(),
 			"{lore}" => implode(TextFormat::EOL, $item->getLore())
 		];
-		$format = str_replace(array_keys($replacements), array_values($replacements), $format);
+		$format = str_replace(array_keys($replacements), array_values($replacements), strval($format));
 		$entity->setNameTag(TextFormat::colorize($format));
 		$entity->setNameTagAlwaysVisible();
 	}
