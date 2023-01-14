@@ -41,7 +41,7 @@ class Main extends PluginBase implements Listener {
 		$this->setNameTag($entity, $entity->getItem()->getCount());
 	}
 
-	public function onItemMerge(ItemMergeEvent $event): void {
+	public function onItemMerges(ItemMergeEvent $event): void {
 		$entity = $event->getEntity();
 		$target = $event->getTarget();
 		if ($entity instanceof ItemEntity) {
