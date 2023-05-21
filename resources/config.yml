@@ -9,5 +9,6 @@
 # - {defensePoints} : Returns how many armor points can be gained by wearing this item.
 # - {maxStackSize} : Returns the highest amount of this item which will fit into one inventory slot.
 # - {lore} : Returns the lore of the item.
+# - {despawnDelay} : Returns the number of time left before this item will despawn.
 format: "{name} x{count}"
 ...
