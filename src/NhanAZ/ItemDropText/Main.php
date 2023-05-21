@@ -41,11 +41,10 @@ class Main extends PluginBase implements Listener {
 		return $second . "s";
 	}
 
-
 	public function setNameTag(ItemEntity $entity, int $count = null): void {
 		$item = $entity->getItem();
 		$format = $this->getConfig()->get("format");
-		if (is_null($count)) {
+		if ($count === null) {
 			$count = $entity->getItem()->getCount();
 		}
 		$replacements = [
