@@ -20,7 +20,7 @@ class Main extends PluginBase implements Listener {
 		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$format = $this->getConfig()->get("format");
-		if (strpos($format, "{despawnDelay}") !== false) {
+		if (strpos($format, "{despawnDelay}")) {
 			$this->getScheduler()->scheduleRepeatingTask(new DespawnDelayTask(), 20);
 		}
 	}
@@ -40,7 +40,6 @@ class Main extends PluginBase implements Listener {
 		}
 		return $second . "s";
 	}
-
 
 	public function setNameTag(ItemEntity $entity, int $count = null): void {
 		$item = $entity->getItem();
