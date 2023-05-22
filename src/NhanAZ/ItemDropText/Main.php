@@ -25,20 +25,21 @@ class Main extends PluginBase implements Listener {
 		}
 	}
 
-	private function tickToTimeFormat(int $tick): string {
-		if ($tick == -1) {
-			return "∞";
+	private function ticksToTimeFormat(int $ticks): string {
+		if ($ticks == -1) {
+			return "Infinity";
+		} else if ($ticks > 6000) {
+			return $ticks . " ticks";
+		} else {
+			$seconds = $ticks / 20;
+			$minutes = floor($seconds / 60);
+			$seconds = floor($seconds) % 60;
+			if ($minutes < 1) {
+				return sprintf("%02ds", $seconds);
+			} else {
+				return sprintf("%02dm%02ds", $minutes, $seconds);
+			}
 		}
-		$originSecond = floor($tick / 20);
-		$minute = floor($originSecond / 60);
-		$second = $originSecond % 60;
-		if ($tick > 6000) {
-			return $tick . " ticks";
-		}
-		if ($minute >= 1) {
-			return $minute . "m" . $second . "s";
-		}
-		return $second . "s";
 	}
 
 	public function setNameTag(ItemEntity $entity, int $count = null): void {
@@ -56,7 +57,7 @@ class Main extends PluginBase implements Listener {
 			"{defensePoints}" => $item->getDefensePoints(),
 			"{maxStackSize}" => $item->getMaxStackSize(),
 			"{lore}" => implode(TextFormat::EOL, $item->getLore()),
-			"{despawnDelay}" => $this->tickToTimeFormat($entity->getDespawnDelay())
+			"{despawnDelay}" => $this->ticksToTimeFormat($entity->getDespawnDelay())
 		];
 		$format = str_replace(array_keys($replacements), array_values($replacements), strval($format));
 		$entity->setNameTag(TextFormat::colorize($format));
